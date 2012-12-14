@@ -1,4 +1,2 @@
-/public/**
-!/public/vendor/
-!/public/spec
-/public/spec/*.js
+public/js/*.js
+public/spec/*.js
