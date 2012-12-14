@@ -1,11 +1,19 @@
 <html>
   <head>
     <title>Backbone Federated Wiki!</title>
-    <script src='js/vendor/underscore.js'></script>
-    <script src='js/vendor/jquery-1.8.3.js'></script>
-    <script src='js/vendor/backbone.js'></script>
 
-    <script src='js/app.js'></script>
+    <script data-main="js/main" src="js/vendor/require.js"></script>
+    <script>
+      requirejs.config({
+        shim: {
+          "vendor/backbone": {
+            "deps": ["vendor/underscore", "vendor/jquery"],
+            "exports": "Backbone"
+          }
+        }
+      });
+    </script>
+
   </head>
   <body>
     <section class="main"/>
