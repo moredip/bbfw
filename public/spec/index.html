@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Jasmine Spec Runner</title>
+
+  <link rel="stylesheet" type="text/css" href="jasmine/jasmine.css">
+  <script type="text/javascript" src="jasmine/jasmine.js"></script>
+  <script type="text/javascript" src="jasmine/jasmine-html.js"></script>
+
+  <script data-main="all" src="/js/vendor/require.js"></script>
+  <script>
+    requirejs.config({
+      paths: {
+        domReady:"/js/vendor/domReady"
+      },
+      shim: {
+        "vendor/backbone": {
+          "deps": ["vendor/underscore", "vendor/jquery"],
+          "exports": "Backbone"
+        }
+      }
+    });
+  </script>
+</head>
+
+<body>
+</body>
+</html>
