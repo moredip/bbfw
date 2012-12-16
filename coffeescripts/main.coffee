@@ -1,12 +1,12 @@
-require ['page_view','page_model','page_store'], (PageView,PageModel,PageStore)->
+require ['vendor/backbone','page_store','router','app'], (Backbone,PageStore,AppRouter,createApp)->
   # HACK, don't know why I can't just require JQuery
   $ = jQuery
 
-  thePageStore = PageStore.createPageStore()
 
   $ ->
-    pageDefinition = thePageStore.lookupPageDefinition('welcome-visitors')
-    page = new PageModel(pageDefinition)
-    pageView = new PageView( model: page )
+    pageStore = PageStore.createPageStore()
+    $mainSection = $('section.main')
+    theApp = createApp({pageStore,$mainSection})
 
-    $('section.main').append( pageView.render().el ) 
+    router = new AppRouter( theApp )
+    Backbone.history.start()
