@@ -4,7 +4,11 @@ define ['vendor/backbone'], (Backbone)->
       @app = app
 
     routes:
+      "": "index"
       "view/:slug": "view"
+
+    index: ()->
+      @navigate('view/welcome-vistors', {trigger:true, replace:true} )
 
     view: (slug)->
       @app.resetToSlug(slug)
