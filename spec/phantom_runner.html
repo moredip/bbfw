@@ -1,0 +1,18 @@
+<script src="../public/spec/jasmine/jasmine.js"></script>
+<script src="../public/spec/jasmine/console-runner.js"></script>
+<script src="../public/spec/spec_list.js"></script>
+<script src="../public/js/vendor/require.js"></script>
+<script>
+  requirejs.config({
+    baseUrl: "../public/js",
+    paths: {
+      domReady:"vendor/domReady"
+    },
+    shim: {
+      "vendor/backbone": {
+        "deps": ["vendor/underscore", "vendor/jquery"],
+        "exports": "Backbone"
+      }
+    }
+  });
+</script>
