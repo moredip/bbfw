@@ -1,0 +1,5 @@
+language: ruby
+rvm: "1.9.3"
+gemfile: travis/Gemfile
+before_script: travis/before_script
+script: travis/script
