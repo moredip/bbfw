@@ -8,7 +8,7 @@ define ['vendor/backbone'], (Backbone)->
       "view/:slug": "view"
 
     index: ()->
-      @navigate('view/welcome-vistors', {trigger:true, replace:true} )
+      @navigate('view/welcome-visitors', {trigger:true, replace:true} )
 
     view: (slug)->
       @app.resetToSlug(slug)
