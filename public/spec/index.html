@@ -12,13 +12,14 @@
   <script type="text/javascript" src="jasmine/jasmine-sinon.js"></script>
 
   <script src="spec_list.js"></script>
-  <script src="/js/vendor/require.js"></script>
+  <script src="../js/vendor/require.js"></script>
+  
   <script>
     require.config({
       baseUrl: "../js",
       paths: {
         spec: "../spec",
-        domReady:"/js/vendor/domReady"
+        domReady:"vendor/domReady"
       },
       shim: {
         "vendor/backbone": {
@@ -30,6 +31,7 @@
 
     require( ["spec/all"] );
   </script>
+
 </head>
 
 <body>
