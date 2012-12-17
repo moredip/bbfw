@@ -8,11 +8,16 @@
   <script type="text/javascript" src="jasmine/jasmine.js"></script>
   <script type="text/javascript" src="jasmine/jasmine-html.js"></script>
   <script type="text/javascript" src="jasmine/console-runner.js"></script>
+  <script type="text/javascript" src="sinon-1.4.2.js"></script>
+  <script type="text/javascript" src="jasmine-sinon.js"></script>
 
-  <script data-main="all" src="/js/vendor/require.js"></script>
+  <script src="spec_list.js"></script>
+  <script src="/js/vendor/require.js"></script>
   <script>
-    requirejs.config({
+    require.config({
+      baseUrl: "../js",
       paths: {
+        spec: "../spec",
         domReady:"/js/vendor/domReady"
       },
       shim: {
@@ -22,6 +27,8 @@
         }
       }
     });
+
+    require( ["spec/all"] );
   </script>
 </head>
 
