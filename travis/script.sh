@@ -1,4 +1,4 @@
 echo "CURRENT WORKING DIRECTORY"
 echo `pwd`
 
-phantomjs ../spec/phantom_runner.coffee
+phantomjs spec/phantom_runner.coffee
