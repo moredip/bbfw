@@ -1,7 +1,6 @@
 __file__ = phantom.libraryPath
 
 waitFor = ({testFn,pollInterval,timeout,onTimeout,onSuccess}) ->
-
   pollInterval ?= 100
   timeout ?= 3000
   onTimeout ?= -> 
@@ -75,7 +74,3 @@ waitFor
   onTimeout: -> 
     console.log( 'tests took too long. Aborting.' )
     phantom.exit(10)
-  
-
-#phantom.exit(1)
-
