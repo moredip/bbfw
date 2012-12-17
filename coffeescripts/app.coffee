@@ -1,7 +1,9 @@
 define ['page_view','page_model'], (PageView,PageModel)->
   nullPageView = { remove: -> }
 
-  createApp = ({pageStore,$mainSection})->
+  createApp = ({pageStore,$mainSection,createPageView,createPageModel})->
+    createPageView ?= (args...)-> new PageView(args...)
+    createPageModel ?= (args...)-> new PageModel(args...)
     rootPageView = nullPageView 
 
     replaceRootPageView = (newView)->
@@ -11,8 +13,8 @@ define ['page_view','page_model'], (PageView,PageModel)->
 
     resetToSlug = (slug)->
       pageDefinition = pageStore.lookupPageDefinition(slug)
-      page = new PageModel(pageDefinition)
-      pageView = new PageView( model: page )
+      page = createPageModel(pageDefinition)
+      pageView = createPageView(model:page)
       replaceRootPageView( pageView )
 
     app = { resetToSlug }
