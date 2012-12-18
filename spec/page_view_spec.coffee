@@ -32,7 +32,6 @@ define ['page_view','vendor/backbone'], (PageView,Backbone)->
       expect( $h2 ).toHaveText('the page title <3')
 
     it "creates an item view for each item in the page's story", ->
-
       pageModel = new Backbone.Model
         story: new Backbone.Collection( [1,2,3] )
 

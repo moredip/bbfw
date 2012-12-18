@@ -26,6 +26,9 @@ define ['vendor/backbone'], (Backbone)->
     tagName: 'div'
     className: 'item'
 
+    events: 
+      'click a': 'linkClicked'
+
     render: ->
       @$el.addClass(@model.get('type'))
 
@@ -34,4 +37,10 @@ define ['vendor/backbone'], (Backbone)->
       $textPara.appendTo(@$el)
 
       @
+
+    linkClicked: (e)->
+      slug = $(e.target).data('slug')
+      @model.internalLinkFollowed(slug)
+      @.trigger('link', slug:slug)
+      @.trigger('link:internal', slug:slug)
 
