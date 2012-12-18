@@ -1,7 +1,7 @@
 desc 'use Guard to compile client-side assets (e.g. coffeescript => javascript)'
 task :compile do
   require 'guard'
-  Guard.setup :guardfile => 'Guardfile'
+  Guard.setup :guardfile => 'Guardfile', :group => ['compile']
   Guard.run_all 
 end
 
