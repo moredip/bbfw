@@ -3,10 +3,12 @@ define ['vendor/backbone','item_view'], (Backbone,ItemView)->
     tagName: 'article'
     className: 'page'
 
+    createItemView: (args...)-> new ItemView(args...)
+
     render: ->
       @$el.html("<h2>#{@model.get('title')}</h2>")
       container = @el
-      @model.get('story').each (item)->
-        itemView = new ItemView(model:item)
+      @model.get('story').each (item)=>
+        itemView = @createItemView(model:item)
         itemView.render().$el.appendTo(container) 
       @
