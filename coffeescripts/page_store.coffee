@@ -10,6 +10,10 @@ define ->
           },
           {
             type: 'paragraph'
+            text: 'Here is [[a link!]]'
+          },
+          {
+            type: 'paragraph'
             text: 'Goodbye for now.'
           }
         ]
