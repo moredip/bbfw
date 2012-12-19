@@ -6,12 +6,12 @@ define ['vendor/backbone'], (Backbone)->
 
 
     onInternalLink = (slug)->
-      page = pageLoader.loadFromSlug(slug)
-      pagesCollection.add(page)
+      pageLoader.loadFromSlug(slug).then (page)->
+        pagesCollection.add(page)
 
     resetToSlug = (slug)->
-      page = pageLoader.loadFromSlug(slug)
-      pagesCollection.reset( [page] )
+      pageLoader.loadFromSlug(slug).then (page)->
+        pagesCollection.reset( [page] )
 
     pagesCollection.on( 'link:internal', onInternalLink )
 

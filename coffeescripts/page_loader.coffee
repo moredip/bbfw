@@ -3,8 +3,8 @@ define ['page_model'], (PageModel)->
     createPageModel ?= (args...)-> new PageModel(args...)
 
     loadFromSlug = (slug)->
-      pageDefinition = pageStore.lookupPageDefinition(slug)
       # TODO: handle lookup failure
-      createPageModel(pageDefinition)
+      pageStore.lookupPageDefinition(slug).pipe (pageDefinition)->
+        createPageModel(pageDefinition)
 
     pageLoader = { loadFromSlug }

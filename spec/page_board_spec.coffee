@@ -1,8 +1,14 @@
-define ['page_board','vendor/backbone'], (createPageBoard,Backbone)->
+define ['page_board','deferred','vendor/backbone'], (createPageBoard,createDeferred,Backbone)->
+  preResolvedPromise = (value)->
+    createDeferred().resolve(value).promise()
+
   describe 'PageBoard', ->
+    createFakePageLoader = (fakePage='blah')->
+       { loadFromSlug: sinon.stub().returns( preResolvedPromise(fakePage) ) }
+
     describe 'resetToSlug', ->
       it 'loads the page for the given slug', ->
-        fakePageLoader = { loadFromSlug: sinon.spy() }
+        fakePageLoader = createFakePageLoader()
         pageBoard = createPageBoard(pageLoader:fakePageLoader)
 
         pageBoard.resetToSlug('some-slug')
@@ -10,7 +16,7 @@ define ['page_board','vendor/backbone'], (createPageBoard,Backbone)->
         expect( fakePageLoader.loadFromSlug ).toHaveBeenCalledWith('some-slug')
 
       it 'replaces the page collection contents with the page', ->
-        fakePageLoader = { loadFromSlug: -> 'fake page' }
+        fakePageLoader = createFakePageLoader('fake page')
         fakePageCollection = {
           reset: sinon.spy()
           on: ->
@@ -27,14 +33,14 @@ define ['page_board','vendor/backbone'], (createPageBoard,Backbone)->
       describe 'handling an internal link being followed', ->
 
         it 'loads the relevant page from the store', ->
-          fakePageLoader = { loadFromSlug: sinon.spy() }
+          fakePageLoader = createFakePageLoader()
           pageBoard = createPageBoard(pageLoader:fakePageLoader)
 
           pageBoard.pagesCollection.trigger( 'link:internal', 'some-slug' )
           expect( fakePageLoader.loadFromSlug ).toHaveBeenCalledWith('some-slug')
 
         it 'adds a page to the page collection', ->
-          fakePageLoader = { loadFromSlug: -> 'fake page' }
+          fakePageLoader = createFakePageLoader('fake page')
           fakePagesCollection = _.extend Backbone.Events,
             add: sinon.spy()
 
