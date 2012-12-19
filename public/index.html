@@ -5,9 +5,12 @@
     <script data-main="js/main" src="js/vendor/require.js"></script>
     <script>
       requirejs.config({
+        paths: {
+          jquery:"vendor/jquery"
+        },
         shim: {
           "vendor/backbone": {
-            "deps": ["vendor/underscore", "vendor/jquery"],
+            "deps": ["vendor/underscore", "jquery"],
             "exports": "Backbone"
           }
         }

@@ -20,11 +20,12 @@
       baseUrl: "../js",
       paths: {
         spec: "../spec",
-        domReady:"vendor/domReady"
+        domReady:"vendor/domReady",
+        jquery:"vendor/jquery"
       },
       shim: {
         "vendor/backbone": {
-          "deps": ["vendor/underscore", "vendor/jquery"],
+          "deps": ["vendor/underscore", "jquery"],
           "exports": "Backbone"
         }
       }

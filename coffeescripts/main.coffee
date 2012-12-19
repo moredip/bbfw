@@ -1,8 +1,4 @@
-require ['vendor/backbone','page_store','router','app'], (Backbone,PageStore,AppRouter,createApp)->
-  # HACK, don't know why I can't just require JQuery
-  $ = jQuery
-
-
+require ['jquery','vendor/backbone','page_store','router','app'], ($,Backbone,PageStore,AppRouter,createApp)->
   $ ->
     pageStore = PageStore.createPageStore()
     $mainSection = $('section.main')
