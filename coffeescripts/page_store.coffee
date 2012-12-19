@@ -1,28 +1,10 @@
-createFakeJsonFor = (slug)->
-  {
-    title: slug
-    story: [
-      {
-        type: 'paragraph'
-        text: "Hello world. This is the page with slug #{slug}"
-      },
-      {
-        type: 'paragraph'
-        text: 'Here is [[a link!]]'
-      },
-      {
-        type: 'paragraph'
-        text: 'Goodbye for now.'
-      }
-    ]
-  }
+HARD_CODED_BASE_URL = "http://fed.wiki.org/"
 
-define ['deferred'], (createDeferred)->
+define ['deferred','jquery'], (createDeferred,$)->
   createPageStore = ->
     lookupPageDefinition: (slug)->
-      deferred = createDeferred()
-      deferred.resolve( createFakeJsonFor(slug) )
-      deferred.promise()
+      url = "#{HARD_CODED_BASE_URL}#{slug}.json?nonce=#{Date.now()}"
+      $.get(url)
 
   {
     createPageStore
