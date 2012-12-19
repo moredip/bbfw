@@ -1,24 +1,15 @@
-define ['page_view','page_model','page_loader'], (PageView,PageModel,createPageLoader)->
-  nullPageView = { remove: -> }
+define ['pages_view','page_loader','page_board'], (PagesView,createPageLoader,createPageBoard)->
 
-  createApp = ({pageStore,$mainSection,createPageView,createPageModel})->
+  createApp = ({pageStore,$mainSection})->
+    pageLoader = createPageLoader({pageStore})
+    pageBoard = createPageBoard({pageLoader})
+    pagesView = new PagesView
+      el: $mainSection
+      collection: pageBoard.pagesCollection
 
-    createPageView ?= (args...)-> new PageView(args...)
-    createPageModel ?= (args...)-> new PageModel(args...)
-    rootPageView = nullPageView 
+    pagesView.render()
 
-    pageLoader = createPageLoader({pageStore,createPageModel})
-
-    replaceRootPageView = (newView)->
-      rootPageView.remove()
-      rootPageView = newView
-      $mainSection.append( rootPageView.render().el ) 
-
-    resetToSlug = (slug)->
-      page = pageLoader.loadFromSlug(slug)
-      pageView = createPageView(model:page)
-      replaceRootPageView( pageView )
-
+    resetToSlug = pageBoard.resetToSlug
     app = { resetToSlug }
 
   createApp

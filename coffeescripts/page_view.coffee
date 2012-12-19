@@ -7,8 +7,7 @@ define ['vendor/backbone','item_view'], (Backbone,ItemView)->
 
     render: ->
       @$el.html("<h2>#{@model.get('title')}</h2>")
-      container = @el
       @model.get('story').each (item)=>
         itemView = @createItemView(model:item)
-        itemView.render().$el.appendTo(container) 
+        @$el.append( itemView.render().$el )
       @
