@@ -7,6 +7,7 @@ define ['vendor/backbone'], (Backbone)->
 
     onInternalLink = (slug)->
       page = pageLoader.loadFromSlug(slug)
+      pagesCollection.add(page)
 
     resetToSlug = (slug)->
       page = pageLoader.loadFromSlug(slug)

@@ -1,4 +1,4 @@
-define ['page_board'], (createPageBoard)->
+define ['page_board','vendor/backbone'], (createPageBoard,Backbone)->
   describe 'PageBoard', ->
     describe 'resetToSlug', ->
       it 'loads the page for the given slug', ->
@@ -24,14 +24,27 @@ define ['page_board'], (createPageBoard)->
 
         expect( fakePageCollection.reset ).toHaveBeenCalledWith(['fake page'])
 
+      describe 'handling an internal link being followed', ->
+
+        it 'loads the relevant page from the store', ->
+          fakePageLoader = { loadFromSlug: sinon.spy() }
+          pageBoard = createPageBoard(pageLoader:fakePageLoader)
+
+          pageBoard.pagesCollection.trigger( 'link:internal', 'some-slug' )
+          expect( fakePageLoader.loadFromSlug ).toHaveBeenCalledWith('some-slug')
+
+        it 'adds a page to the page collection', ->
+          fakePageLoader = { loadFromSlug: -> 'fake page' }
+          fakePagesCollection = _.extend Backbone.Events,
+            add: sinon.spy()
+
+          pageBoard = createPageBoard
+            pageLoader: fakePageLoader
+            pagesCollection: fakePagesCollection
+
+          fakePagesCollection.trigger('link:internal')
+
+          expect( fakePagesCollection.add ).toHaveBeenCalledWith('fake page')
+    
 
 
-
-      xit 'reacts to an internal link being followed by loading that page', ->
-        fakePageLoader = sinon.spy()
-        pageBoard = createPageBoard(pageLoader:fakePageLoader)
-
-        pageBoard.get('pages').trigger( 'link:internal', 'some-slug' )
-        expect( fakePageLoader ).toHaveBeenCalledWith('some-slug')
-
-      xit 'adds the loaded page to the pages'

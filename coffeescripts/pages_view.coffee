@@ -4,7 +4,7 @@ define ['vendor/backbone','page_view'], (Backbone,PageView)->
 
     initialize: -> 
       if @collection?
-        @collection.on( 'change', @render, @ )
+        @collection.on( 'add', @render, @ )
         @collection.on( 'reset', @render, @ )
 
     render: ->

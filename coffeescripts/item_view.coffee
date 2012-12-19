@@ -39,8 +39,6 @@ define ['vendor/backbone'], (Backbone)->
       @
 
     linkClicked: (e)->
+      e.preventDefault()
       slug = $(e.target).data('slug')
       @model.internalLinkFollowed(slug)
-      @.trigger('link', slug:slug)
-      @.trigger('link:internal', slug:slug)
-

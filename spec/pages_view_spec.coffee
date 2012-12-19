@@ -13,7 +13,7 @@ define ['vendor/backbone','pages_view'], (Backbone,PagesView)->
       })
         
 
-      expect( fakeCollection.on ).toHaveBeenCalledWith('change')
+      expect( fakeCollection.on ).toHaveBeenCalledWith('add')
       expect( fakeCollection.on ).toHaveBeenCalledWith('reset')
 
     describe 'after a collection reset', ->
@@ -38,3 +38,13 @@ define ['vendor/backbone','pages_view'], (Backbone,PagesView)->
 
         expect( pagesView.$el.find('div.fake-view').size() ).toBe(3)
 
+    describe 'after a collection add', ->
+      it 'ends up with all the pages in the collection rendered', ->
+        pagesView = new PagesView
+          collection: new Backbone.Collection()
+        pagesView.createPageView = createFakeView
+
+        pagesView.collection.add(1)
+        pagesView.collection.add(2)
+
+        expect( pagesView.$el.find('div.fake-view').size() ).toBe(2)
