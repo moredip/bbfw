@@ -1,2 +1,4 @@
 public/js/*.js
+public/css
 public/spec/*.js
+.sass-cache

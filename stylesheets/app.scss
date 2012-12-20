@@ -1,0 +1,27 @@
+body {
+  background-color: hotpink;
+  font-family: Helvetica;
+}
+
+h1.backdrop {
+  position: absolute;
+  z-index: -1000;
+  font-size: 55pt;
+  top: -1.0em;
+  left: -0.15em;
+  
+}
+
+.main {
+  width: 1000000%;
+}
+
+.page {
+  float: left;
+  margin: 8px;
+  padding: 0 31px;
+  width: 430px;
+  background-color: rgba(255, 255, 255, 0.9);
+  height: 100%;
+  overflow: auto;
+}
