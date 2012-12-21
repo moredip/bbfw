@@ -51,6 +51,29 @@ define ['item_view','vendor/backbone'], (ItemView,Backbone)->
         expect( $a ).toHaveText('A link with Bangs! and <3')
         expect( $a.data('slug') ).toBe('a-link-with-bangs-and-3')
 
+      describe 'rendering references', ->
+        item = itemView = undefined
+        beforeEach ->
+          item = new Backbone.Model
+            type: 'reference'
+            slug: 'slug-being-referenced'
+            text: 'reference text'
+            title: 'Reference title'
+            site: 'reference.site.com'
+          itemView = new ItemView( model: item )
+          itemView.render()
+
+        it 'renders the ref title as a link', ->
+          expect( itemView.$el ).toContain('a.internal')
+          expect( itemView.$el.find('a.internal') ).toHaveText('Reference title')
+
+        it 'renders the text', ->
+         expect( itemView.$el.find('p') ).toHaveText('reference text')
+
+        it 'renders the flag'
+        it 'renders the link with correct attrs'
+
+
     describe 'events', ->
       it 'informs its model when an internal link is clicked', ->
         item = new Backbone.Model

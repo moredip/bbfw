@@ -29,8 +29,15 @@ define ['vendor/backbone'], (Backbone)->
     events: 
       'click a': 'linkClicked'
 
+    renderReferenceElements: ->
+      $('<a class="internal">').text(@model.get('title'))
+      
+
     render: ->
       @$el.addClass(@model.get('type'))
+
+      if @model.get('type') == 'reference'
+        @$el.append( @renderReferenceElements() )
 
       $textPara = $('<p>').text(@model.get('text'))
       htmlizeElementContents($textPara)
