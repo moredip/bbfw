@@ -4,7 +4,7 @@ define ['deferred','jquery'], (createDeferred,$)->
   createPageStore = ->
     lookupPageDefinition: (slug,site)->
       site ?= HARD_CODED_ORIGIN
-      url = "http://#{site}/#{slug}.json?nonce=#{Date.now()}"
+      url = "http://#{site}/#{slug}.json?cache-buster=#{Date.now()}"
       $.get(url)
 
   {
