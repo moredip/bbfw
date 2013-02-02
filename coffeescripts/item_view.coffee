@@ -29,12 +29,18 @@ define ['vendor/backbone'], (Backbone)->
       'click a': 'linkClicked'
 
     renderReferenceElements: ->
-      $('<a>')
+      $link = $('<a>')
         .addClass('internal')
+        .attr('href','javascript:void(0)')
         .data
           'slug': @model.get('slug')
           'site': @model.get('site')
         .text(@model.get('title'))
+      $img = $('<img>')
+        .addClass('small-flag')
+        .attr('src', "http://#{@model.get('site')}/favicon.png")
+
+      $('<div>').append($img).append($link)
       
 
     render: ->

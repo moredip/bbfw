@@ -79,7 +79,10 @@ define ['item_view','vendor/backbone'], (ItemView,Backbone)->
         it 'adds the site as data', ->
           expect( $linkEl() ).toHaveData('site','reference.site.com')
 
-        it 'renders the flag'
+        it 'renders the flag', ->
+          $img = itemView.$el.find('img')
+          expect( $img ).toExist()
+          expect( $img ).toHaveAttr('src','http://reference.site.com/favicon.png')
 
         it 'triggers an event with the relevant info when the ref. link is clicked', ->
           item.internalLinkFollowed = sinon.spy()
