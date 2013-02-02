@@ -1,7 +1,8 @@
 define ['vendor/backbone'], (Backbone)->
+
   ItemModel = Backbone.Model.extend
-    internalLinkFollowed: (slug)->
-      @trigger( 'link', slug: slug, linkType: 'internal' )
+    internalLinkFollowed: (linkInfo)->
+      @trigger( 'link', linkInfo: linkInfo, linkType: 'internal' )
 
   StoryCollection = Backbone.Collection.extend
     model: ItemModel
@@ -14,6 +15,6 @@ define ['vendor/backbone'], (Backbone)->
       # reference cycle?
       story.on('link',@onLink,@)
 
-    onLink: ({slug,linkType})->
-      @trigger('link',slug)
-      @trigger("link:#{linkType}",slug) if linkType?
+    onLink: ({linkInfo,linkType})->
+      @trigger('link',linkInfo)
+      @trigger("link:#{linkType}",linkInfo) if linkType?

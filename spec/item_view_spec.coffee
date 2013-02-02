@@ -63,26 +63,27 @@ define ['item_view','vendor/backbone'], (ItemView,Backbone)->
           itemView = new ItemView( model: item )
           itemView.render()
 
+        $linkEl = ->
+          itemView.$el.find('a.internal')
+
         it 'renders the ref title as a link', ->
           expect( itemView.$el ).toContain('a.internal')
-          expect( itemView.$el.find('a.internal') ).toHaveText('Reference title')
+          expect( $linkEl() ).toHaveText('Reference title')
 
         it 'renders the text', ->
          expect( itemView.$el.find('p') ).toHaveText('reference text')
 
+        it 'adds the slug as data', ->
+          expect( $linkEl() ).toHaveData('slug','slug-being-referenced')
+
+        it 'adds the site as data', ->
+          expect( $linkEl() ).toHaveData('site','reference.site.com')
+
         it 'renders the flag'
-        it 'renders the link with correct attrs'
 
-
-    describe 'events', ->
-      it 'informs its model when an internal link is clicked', ->
-        item = new Backbone.Model
-          text: 'I have an [[internal link]] here'
-        item.internalLinkFollowed = sinon.spy()
-
-        itemView = new ItemView( model: item )
-        itemView.render()
-
-        itemView.$el.find('a').click()
-        
-        expect( item.internalLinkFollowed ).toHaveBeenCalledWith('internal-link')
+        it 'triggers an event with the relevant info when the ref. link is clicked', ->
+          item.internalLinkFollowed = sinon.spy()
+          $linkEl().click()
+          expect( item.internalLinkFollowed ).toHaveBeenCalledWith
+            slug:'slug-being-referenced'
+            site: 'reference.site.com'

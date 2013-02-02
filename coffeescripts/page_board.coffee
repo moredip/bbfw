@@ -5,8 +5,8 @@ define ['vendor/backbone'], (Backbone)->
     pagesCollection ?= new Pages()
 
 
-    onInternalLink = (slug)->
-      pageLoader.loadFromSlug(slug).then (page)->
+    onInternalLink = (linkInfo)->
+      pageLoader.loadFromSlug(linkInfo.slug).then (page)->
         pagesCollection.add(page)
 
     resetToSlug = (slug)->

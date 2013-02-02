@@ -4,7 +4,8 @@ define ['page_board','deferred','vendor/backbone'], (createPageBoard,createDefer
 
   describe 'PageBoard', ->
     createFakePageLoader = (fakePage='blah')->
-       { loadFromSlug: sinon.stub().returns( preResolvedPromise(fakePage) ) }
+      stubLoadFn = sinon.stub().returns( preResolvedPromise(fakePage) )
+      { loadFromSlug: stubLoadFn, loadFromLinkInfo: stubLoadFn }
 
     describe 'resetToSlug', ->
       it 'loads the page for the given slug', ->
@@ -36,8 +37,8 @@ define ['page_board','deferred','vendor/backbone'], (createPageBoard,createDefer
           fakePageLoader = createFakePageLoader()
           pageBoard = createPageBoard(pageLoader:fakePageLoader)
 
-          pageBoard.pagesCollection.trigger( 'link:internal', 'some-slug' )
-          expect( fakePageLoader.loadFromSlug ).toHaveBeenCalledWith('some-slug')
+          pageBoard.pagesCollection.trigger( 'link:internal', 'fake link info' )
+          expect( fakePageLoader.loadFromLinkInfo ).toHaveBeenCalledWith('fake link info')
 
         it 'adds a page to the page collection', ->
           fakePageLoader = createFakePageLoader('fake page')
@@ -48,7 +49,7 @@ define ['page_board','deferred','vendor/backbone'], (createPageBoard,createDefer
             pageLoader: fakePageLoader
             pagesCollection: fakePagesCollection
 
-          fakePagesCollection.trigger('link:internal')
+          fakePagesCollection.trigger('link:internal', {})
 
           expect( fakePagesCollection.add ).toHaveBeenCalledWith('fake page')
     

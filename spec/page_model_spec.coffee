@@ -20,8 +20,9 @@ define ['page_model'], (PageModel)->
       page.on 'link', linkSpy = sinon.spy()
       page.on 'link:internal', internalLinkSpy = sinon.spy()
 
-      itemInPage.internalLinkFollowed('some-slug')
+      linkInfo = 'some link info'
+      itemInPage.internalLinkFollowed(linkInfo)
 
-      expect( linkSpy ).toHaveBeenCalledWith('some-slug')
-      expect( internalLinkSpy ).toHaveBeenCalledWith('some-slug')
+      expect( linkSpy ).toHaveBeenCalledWith(linkInfo)
+      expect( internalLinkSpy ).toHaveBeenCalledWith(linkInfo)
 

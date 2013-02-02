@@ -16,8 +16,7 @@ define ['vendor/backbone'], (Backbone)->
       slug = asSlug($a.text())
       $a.data('slug', slug)
 
-      # TEMPORARY HACK SO WE CAN WATCH LINKS WORK
-      $a.attr('href',"#view/#{slug}")
+      $a.attr('href',"javascript:void(0)")
     $el
 
 
@@ -30,7 +29,12 @@ define ['vendor/backbone'], (Backbone)->
       'click a': 'linkClicked'
 
     renderReferenceElements: ->
-      $('<a class="internal">').text(@model.get('title'))
+      $('<a>')
+        .addClass('internal')
+        .data
+          'slug': @model.get('slug')
+          'site': @model.get('site')
+        .text(@model.get('title'))
       
 
     render: ->
@@ -47,5 +51,7 @@ define ['vendor/backbone'], (Backbone)->
 
     linkClicked: (e)->
       e.preventDefault()
-      slug = $(e.target).data('slug')
-      @model.internalLinkFollowed(slug)
+      $target = $(e.target)
+      @model.internalLinkFollowed
+        slug: $target.data('slug')
+        site: $target.data('site')
